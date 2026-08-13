@@ -27,7 +27,7 @@ export default function WhatsAppButton() {
         whileTap={{ rotate: 0 }}
         className="h-6 w-6 text-white"
       >
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/whatsapp.svg" alt="WhatsApp" className="h-6 w-6" />
+        <img src="/icons/whatsapp.svg" alt="WhatsApp" className="h-6 w-6" />
       </motion.div>
     </motion.a>
   );
