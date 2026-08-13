@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { MessageCircle, MessageSquare, X, ArrowUpRight } from 'lucide-react';
 
@@ -10,6 +10,7 @@ export default function ChatBotWidget() {
   const [inputValue, setInputValue] = useState('');
   const [typing, setTyping] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const lastMessageTime = useRef(0);
 
   const welcomeMessage = "¡Hola! �� 👋 Soy el asistente virtual. ¿En qué área deseas potenciar tu negocio hoy?";
 
@@ -31,6 +32,18 @@ export default function ChatBotWidget() {
 
   const handleSendMessage = async (text: string) => {
     if (!text.trim()) return;
+
+    // Rate limit: 1 message per second
+    const now = Date.now();
+    if (now - lastMessageTime.current < 1000) {
+      return;
+    }
+    lastMessageTime.current = now;
+
+    // Max length: 500 characters
+    if (text.length > 500) {
+      return;
+    }
 
     setMessages(prev => [...prev, { text, isUser: true }]);
     setInputValue('');
