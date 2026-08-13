@@ -4,7 +4,10 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 export default function WhatsAppButton() {
-  const whatsappUrl = "https://wa.me/5582485031?text=Hola,%20vi%20tu%20p%C3%A1gina%20web%20y%20me%20gustar%C3%ADa%20cotizar%20sus%20servicios%20de%20software,%20marketing/ads%20y%20desarrollo.";
+  const whatsappNumber = process.env.WHATSAPP_NUMBER || '';
+  const whatsappUrl = whatsappNumber
+    ? `https://wa.me/${whatsappNumber}?text=Hola,%20vi%20tu%20p%C3%A1gina%20web%20y%20me%20gustar%C3%ADa%20cotizar%20sus%20servicios%20de%20software,%20marketing/ads%20y%20desarrollo.`
+    : '#';
 
   return (
     <motion.a
