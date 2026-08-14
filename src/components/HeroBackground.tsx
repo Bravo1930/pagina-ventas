@@ -45,7 +45,7 @@ export default function HeroBackground({ includeReds = false }: { includeReds?: 
       move: {
         enable: true,
         speed: 2,
-        direction: 'none',
+        direction: 'none', // no fixed direction; random movement enabled
         random: true,
         straight: false,
         out_mode: 'out',
