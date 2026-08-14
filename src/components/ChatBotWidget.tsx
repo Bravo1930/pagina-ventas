@@ -212,7 +212,7 @@ export default function ChatBotWidget() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
-                onClick={handleSendMessage}
+                onClick={() => handleSendMessage(inputValue)}
                 disabled={!inputValue.trim() || typing}
                 className="ml-3 h-10 w-10 flex items-center justify-center rounded-full bg-primary-500 hover:bg-primary-600 transition-all"
                 aria-label="Enviar mensaje"
