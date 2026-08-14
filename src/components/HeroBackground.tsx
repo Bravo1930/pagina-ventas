@@ -1,12 +1,30 @@
 'use client';
 
 import { Particles } from '@tsparticles/react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function HeroBackground({ includeReds = false }: { includeReds?: boolean } = {}) {
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Update mouse position normalized (0-1)
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY, innerWidth, innerHeight } = window;
+      setMousePos({
+        x: clientX / innerWidth,
+        y: clientY / innerHeight,
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   const particlesOptions = {
     particles: {
       number: {
-        value: 80,
+        value: 120,
         density: {
           enable: true,
           value_area: 800
@@ -16,36 +34,45 @@ export default function HeroBackground({ includeReds = false }: { includeReds?: 
         value: '#3b82f6' // blue-500
       },
       opacity: {
-        value: 0.25,
+        value: 0.3,
         random: true,
         anim: {
           enable: true,
-          speed: 0.5,
-          opacity_min: 0.1,
+          speed: 0.2,
+          opacity_min: 0.05,
+          opacity_max: 0.4,
           sync: false
         }
       },
       size: {
-        value: 3,
+        value: 4,
         random: true,
         anim: {
           enable: true,
-          speed: 2,
-          size_min: 0.1,
+          speed: 1.5,
+          size_min: 0.5,
+          size_max: 6,
           sync: false
         }
       },
-      line_linked: {
+      // Links between particles to create neural network feel
+      links: {
         enable: true,
-        distance: 150,
+        distance: 180,
         color: '#3b82f6',
         opacity: 0.15,
-        width: 1
+        width: 1,
+        // Optional: make links fade with distance
+        shadow: {
+          enable: true,
+          color: '#60a5fa',
+          blur: 5
+        }
       },
       move: {
         enable: true,
-        speed: 2,
-        direction: 'none', // no fixed direction; random movement enabled
+        speed: 1.5,
+        direction: 'none',
         random: true,
         straight: false,
         out_mode: 'out',
@@ -55,6 +82,10 @@ export default function HeroBackground({ includeReds = false }: { includeReds?: 
           rotateX: 600,
           rotateY: 600
         }
+      },
+      // Optional: add slight shape variance
+      shape: {
+        type: 'circle'
       }
     },
     interactivity: {
@@ -71,7 +102,7 @@ export default function HeroBackground({ includeReds = false }: { includeReds?: 
       },
       modes: {
         repulse: {
-          distance: 100,
+          distance: 120,
           duration: 0.4
         },
         push: {
@@ -82,10 +113,26 @@ export default function HeroBackground({ includeReds = false }: { includeReds?: 
     retina_detect: true
   };
 
+  // Calculate transform based on mouse position for subtle parallax
+  const getTransform = () => {
+    const { x, y } = mousePos;
+    // Convert 0-1 range to -10 to 10 degrees for subtle tilt
+    const rotateX = (y - 0.5) * 20; // -10 to 10
+    const rotateY = (x - 0.5) * 20; // -10 to 10
+    return `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  };
+
   return (
     <div
+      ref={containerRef}
       className="absolute inset-0 z-0 pointer-effects-none"
-      style={{ width: '100%', height: '100%', backgroundColor: 'rgba(59,130,246,0.05)' }}
+      style={{
+        width: '100%',
+        height: '100%',
+        background: 'radial-gradient(circle at center, rgba(59,130,246,0.03) 0%, transparent 70%)',
+        transform: getTransform(),
+        transformStyle: 'preserve-3d'
+      }}
     >
       <Particles
         id="tsparticles"
