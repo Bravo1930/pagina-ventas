@@ -14,7 +14,7 @@ export default function Hero() {
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="relative pt-20 pb-24 lg:pt-28 lg:pb-32 z-10"
+        className="relative pt-20 pb-24 lg:pt-28 lg:pb-32 z-10 bg-gradient-to-b from-[#0a0e1a] to-[#0f172a]"
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-12">
           <div className="mx-auto max-w-4xl text-center">
