@@ -1,7 +1,6 @@
 'use client';
 
-import { TsParticles } from '@tsparticles/react';
-import { loadFull } from 'tsparticles';
+import { Particles } from '@tsparticles/react';
 
 export default function HeroBackground({ includeReds = false }: { includeReds?: boolean } = {}) {
   const particlesOptions = {
@@ -88,7 +87,7 @@ export default function HeroBackground({ includeReds = false }: { includeReds?: 
       className="absolute inset-0 z-0 pointer-effects-none"
       style={{ width: '100%', height: '100%', backgroundColor: 'rgba(59,130,246,0.05)' }}
     >
-      <TsParticles
+      <Particles
         id="tsparticles"
         options={particlesOptions}
       />
