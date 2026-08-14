@@ -10,7 +10,8 @@ export default function HeroBackground({ includeReds = false }: { includeReds?: 
   // Update mouse position normalized (0-1)
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY, innerWidth, innerHeight } = window;
+     const { clientX, clientY } = e;
+        const { innerWidth, innerHeight } = window;
       setMousePos({
         x: clientX / innerWidth,
         y: clientY / innerHeight,
@@ -72,7 +73,7 @@ export default function HeroBackground({ includeReds = false }: { includeReds?: 
       move: {
         enable: true,
         speed: 1.5,
-        direction: 'none',
+        direction: 'none' as const,
         random: true,
         straight: false,
         out_mode: 'out',
