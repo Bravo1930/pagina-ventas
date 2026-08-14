@@ -25,7 +25,7 @@ export default function HeroBackground({ includeReds = false }: { includeReds?: 
   const particlesOptions = {
     particles: {
       number: {
-        value: 120,
+        value: 180,
         density: {
           enable: true,
           value_area: 800
@@ -35,44 +35,44 @@ export default function HeroBackground({ includeReds = false }: { includeReds?: 
         value: '#3b82f6' // blue-500
       },
       opacity: {
-        value: 0.3,
+        value: 0.35,
         random: true,
         anim: {
           enable: true,
           speed: 0.2,
-          opacity_min: 0.05,
-          opacity_max: 0.4,
+          opacity_min: 0.07,
+          opacity_max: 0.5,
           sync: false
         }
       },
       size: {
-        value: 4,
+        value: 5,
         random: true,
         anim: {
           enable: true,
           speed: 1.5,
-          size_min: 0.5,
-          size_max: 6,
+          size_min: 0.8,
+          size_max: 9,
           sync: false
         }
       },
       // Links between particles to create neural network feel
       links: {
         enable: true,
-        distance: 180,
+        distance: 220,
         color: '#3b82f6',
-        opacity: 0.15,
-        width: 1,
+        opacity: 0.2,
+        width: 1.2,
         // Optional: make links fade with distance
         shadow: {
           enable: true,
           color: '#60a5fa',
-          blur: 5
+          blur: 6
         }
       },
       move: {
         enable: true,
-        speed: 1.5,
+        speed: 1.8,
         direction: 'none' as const,
         random: true,
         straight: false,
@@ -103,11 +103,11 @@ export default function HeroBackground({ includeReds = false }: { includeReds?: 
       },
       modes: {
         repulse: {
-          distance: 120,
+          distance: 150,
           duration: 0.4
         },
         push: {
-          particles_nb: 4
+          particles_nb: 5
         }
       }
     },
@@ -126,11 +126,12 @@ export default function HeroBackground({ includeReds = false }: { includeReds?: 
   return (
     <div
       ref={containerRef}
-      className="absolute inset-0 z-0 pointer-effects-none"
+      className="absolute inset-0 pointer-effects-none"
       style={{
         width: '100%',
         height: '100%',
-        background: 'radial-gradient(circle at center, rgba(59,130,246,0.03) 0%, transparent 70%)',
+        zIndex: 5,
+        background: 'radial-gradient(circle at center, rgba(59,130,246,0.08) 0%, transparent 70%)',
         transform: getTransform(),
         transformStyle: 'preserve-3d'
       }}
